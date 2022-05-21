@@ -106,9 +106,9 @@ def change_password(
     user: User = Depends(get_current_user),
     data: UserUpdatePassword = Body(),
 ):
-    """Change password route, validate user password than update them"""
+    """Change password route, validate user password and update it"""
 
     if not services.verify_password(data.old_password, user.password_hash):
-        raise ValidationError(errors.INVALID_PASSWORD, location="password")
+        raise ValidationError(errors.INVALID_PASSWORD, location="old_password")
 
     crud.update_user_password(session, user, data.password)
