@@ -12,9 +12,9 @@ T = TypeVar("T")
 class DatabaseModel(GenericModel, Generic[T]):
     """Base database model"""
 
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-    created_at: datetime = Field(default_factory=datetime.utcnow, index=True)
-    updated_at: datetime = Field(default_factory=datetime.utcnow, index=True)
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True, nullable=False)
+    created_at: datetime = Field(default_factory=datetime.utcnow, index=True, nullable=False)
+    updated_at: datetime = Field(default_factory=datetime.utcnow, index=True, nullable=False)
 
     @declared_attr
     def __tablename__(cls) -> str:
