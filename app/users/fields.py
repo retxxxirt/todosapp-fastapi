@@ -4,6 +4,8 @@ from app.users import errors
 
 
 class Username(ConstrainedStr):
+    """Username field class with validation"""
+
     min_length = 4
     max_length = 32
 
@@ -19,6 +21,8 @@ class Username(ConstrainedStr):
 
 
 class Password(ConstrainedStr):
+    """Password field class with validation"""
+
     min_length = 6
     max_length = 256
 
