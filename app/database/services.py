@@ -10,6 +10,4 @@ def create_tables(engine: Engine):
 
 def drop_tables(engine: Engine):
     """Drop all tables"""
-    for table in SQLModel.metadata.sorted_tables:
-        if inspect(engine).has_table(table):
-            table.drop(engine)
+    SQLModel.metadata.drop_all(engine)
