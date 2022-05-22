@@ -1,26 +1,12 @@
 from fastapi.testclient import TestClient
 from passlib.handlers.pbkdf2 import pbkdf2_sha256
-from requests import Response
 from sqlmodel import Session
 from starlette import status
 
 from app.users import errors
 from app.users.schemas import AccessTokenType, User
 from tests.users.fixtures import UserData
-
-
-def _make_request(
-    client: TestClient,
-    method: str,
-    path: str,
-    data: dict = None,
-) -> tuple[Response, dict]:
-    """Make request, return response and parsed data"""
-
-    data_key = "params" if method == "get" else "json"
-    response = client.request(method, path, **{data_key: data})
-
-    return response, response.json()
+from tests.utils import _make_request
 
 
 def test_signup(session: Session, anonymous_client: TestClient):
