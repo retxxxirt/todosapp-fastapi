@@ -8,8 +8,9 @@ from sqlalchemy import pool
 # access to the values within the .ini file in use.
 from sqlmodel import SQLModel
 
-from app.settings import settings
+# noinspection PyUnresolvedReferences
 from app.database import include
+from app.settings import settings
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url)

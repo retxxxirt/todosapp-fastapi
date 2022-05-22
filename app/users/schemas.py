@@ -2,9 +2,10 @@ from enum import Enum
 from uuid import UUID
 
 from pydantic import BaseModel, constr, validator
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, SQLModel, Relationship
 
 from app.database.schemas import DatabaseModel
+from app.todos.schemas import Todo
 
 Username = constr(min_length=4, max_length=32)
 Password = constr(min_length=6, max_length=256)
@@ -20,6 +21,7 @@ class User(UserBase, DatabaseModel, SQLModel, table=True):
     """Database user schema"""
 
     password_hash: str
+    todos: list[Todo] = Relationship(back_populates="user")
 
 
 class UserRead(UserBase):

@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import TypeVar, Generic, Sequence
 
 from pydantic import BaseModel, conint
@@ -19,6 +20,13 @@ class Page(GenericModel, Generic[T]):
 
     count: conint(ge=0)
     items: Sequence[T]
+
+
+class Ordering(str, Enum):
+    """Ordering enum"""
+
+    asc = "asc"
+    desc = "desc"
 
 
 def paginate(items: list | Query, paginator: Paginator) -> Page:
