@@ -2,7 +2,7 @@ from requests import Response
 from starlette.testclient import TestClient
 
 
-def _make_request(
+def make_request(
     client: TestClient,
     method: str,
     path: str,
