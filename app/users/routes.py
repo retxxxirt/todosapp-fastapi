@@ -30,7 +30,7 @@ def signup(
     session: Session = Depends(get_session),
     data: SignUp = Body(),
 ):
-    """Signin route, validate username then create user and return jwt-token"""
+    """Validate username then create user and return jwt-token"""
 
     if crud.get_user_by_username(session, data.username) is not None:
         raise ValidationError(errors.USERNAME_TAKEN, location="username")
@@ -45,7 +45,7 @@ def signin(
     session: Session = Depends(get_session),
     data: SignIn = Body(),
 ):
-    """Signin route, validate username and password then return jwt-token"""
+    """Validate username and password then return jwt-token"""
 
     if (user := crud.get_user_by_username(session, data.username)) is None:
         raise ValidationError(errors.INVALID_CREDENTIALS)
@@ -66,13 +66,13 @@ def list_users(
     session: Session = Depends(get_session),
     paginator: Paginator = Depends(),
 ):
-    """List users route, return paginated users list"""
+    """Return paginated users"""
     return paginate(crud.get_users(session), paginator)
 
 
 @profile_router.get("/", response_model=UserRead)
 def get_profile(user: User = Depends(get_current_user)):
-    """Profile route, return user profile"""
+    """Return user profile"""
     return user
 
 
@@ -82,7 +82,7 @@ def update_profile(
     user: User = Depends(get_current_user),
     data: UserUpdate = Body(),
 ):
-    """Update profile route, validate username than return updated user"""
+    """Validate username and return updated user"""
 
     if data.username is not None:
         if crud.get_user_by_username(session, data.username) is not None:
@@ -96,7 +96,7 @@ def delete_profile(
     session: Session = Depends(get_session),
     user: User = Depends(get_current_user),
 ):
-    """Delete profile route, delete user profile"""
+    """Delete user profile"""
     crud.delete_user(session, user)
 
 
@@ -106,7 +106,7 @@ def change_password(
     user: User = Depends(get_current_user),
     data: UserUpdatePassword = Body(),
 ):
-    """Change password route, validate user password and update it"""
+    """Validate user password and update it"""
 
     if not services.verify_password(data.old_password, user.password_hash):
         raise ValidationError(errors.INVALID_PASSWORD, location="old_password")

@@ -19,7 +19,7 @@ def get_user_by_username(session: Session, username: str) -> User | None:
 
 
 def create_user(session: Session, data: UserCreate) -> User:
-    """Create user, generate password_hash for them"""
+    """Create user, generate password_hash for it"""
 
     user_data = data.dict(exclude={"password"})
     user_data["password_hash"] = services.encode_password(data.password)
