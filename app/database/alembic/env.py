@@ -9,6 +9,7 @@ from sqlalchemy import pool
 from sqlmodel import SQLModel
 
 from app.settings import settings
+from app.database import include
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url)
