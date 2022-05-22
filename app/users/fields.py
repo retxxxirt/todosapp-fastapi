@@ -35,6 +35,6 @@ class Password(ConstrainedStr):
                 has_uppercase = True
 
         if not (has_uppercase and has_number):
-            raise ValueError()
+            raise ValueError(errors.INVALID_PASSWORD_FORMAT)
 
         return value
