@@ -6,7 +6,7 @@ from starlette import status
 from app.users import errors
 from app.users.schemas import AccessTokenType, User
 from tests.users.fixtures import UserData
-from tests.utils import make_request
+from tests._utils import make_request
 
 
 def test_signup(session: Session, anonymous_client: TestClient):
