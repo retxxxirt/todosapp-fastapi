@@ -1,4 +1,3 @@
-from sqlalchemy import inspect
 from sqlalchemy.engine import Engine
 from sqlmodel import SQLModel
 

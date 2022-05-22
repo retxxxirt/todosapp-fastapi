@@ -5,8 +5,8 @@ from starlette import status
 
 from app.users import errors
 from app.users.schemas import AccessTokenType, User
-from tests.users.fixtures import UserData
 from tests._utils import make_request
+from tests.users.fixtures import UserData
 
 
 def test_signup(session: Session, anonymous_client: TestClient):
@@ -48,8 +48,8 @@ def test_list_users(client: TestClient, users: list[User]):
     response, response_data = make_request(client, "get", "/users/")
     assert response_data["count"] == len(users)
 
-    for index, user_data in enumerate(response_data["items"]):
-        assert user_data["id"] == str(users[index].id)
+    for user, user_data in zip(users, response_data["items"]):
+        assert str(user.id) == user_data["id"]
 
 
 def test_get_profile(client: TestClient, user: User):
@@ -72,8 +72,7 @@ def test_delete_profile(client: TestClient, session: Session, user: User):
     response, response_data = make_request(client, "delete", "/profile/")
     assert response.status_code == status.HTTP_200_OK
 
-    user = session.query(User).where(User.id == user.id).first()
-    assert user is None
+    assert session.query(User).get(user.id) is None
 
 
 def test_change_password(client: TestClient, session: Session, user_data: UserData):
