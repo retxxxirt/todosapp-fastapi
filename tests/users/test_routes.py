@@ -10,7 +10,7 @@ from tests.users.fixtures import UserData
 
 
 def test_signup(session: Session, anonymous_client: TestClient):
-    data = {"username": "username", "password": "password", "password_confirm": "password"}
+    data = {"username": "username", "password": "Passw0rd", "password_confirm": "Passw0rd"}
     response, response_data = make_request(anonymous_client, "post", "/signup", data)
 
     assert response.status_code == status.HTTP_200_OK

@@ -20,9 +20,9 @@ def users_data(session: Session) -> list[UserData]:
     users = []
 
     for index in range(3):
-        password_hash = users_services.encode_password("password")
+        password_hash = users_services.encode_password("Passw0rd")
         user = User(username=f"username{index}", password_hash=password_hash)
-        users.append(UserData(user, "password"))
+        users.append(UserData(user, "Passw0rd"))
 
         session.add(user)
         session.flush()

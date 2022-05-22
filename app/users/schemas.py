@@ -1,14 +1,12 @@
 from enum import Enum
 from uuid import UUID
 
-from pydantic import BaseModel, constr, validator
+from pydantic import BaseModel, validator
 from sqlmodel import Field, SQLModel, Relationship
 
 from app.database.schemas import DatabaseModel
 from app.todos.schemas import Todo
-
-Username = constr(min_length=4, max_length=32)
-Password = constr(min_length=6, max_length=256)
+from app.users.fields import Username, Password
 
 
 class UserBase(BaseModel):

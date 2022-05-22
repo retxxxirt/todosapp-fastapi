@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic import BaseSettings, PostgresDsn
 
 
 class Settings(BaseSettings):
@@ -6,8 +6,8 @@ class Settings(BaseSettings):
 
     environment: str = "development"
     secret_key: str
-    database_url: str
-    test_database_url: str
+    database_url: PostgresDsn
+    test_database_url: PostgresDsn
 
 
 settings = Settings()

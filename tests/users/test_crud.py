@@ -27,15 +27,15 @@ def test_get_user_by_username_nonexistent(session: Session, users: list[User]):
 
 
 def test_create_user(session: Session):
-    data = UserCreate(username="username", password="password")
+    data = UserCreate(username="username", password="Passw0rd")
     user = crud.create_user(session, data)
 
     assert user.username == "username"
-    assert pbkdf2_sha256.verify("password", user.password_hash)
+    assert pbkdf2_sha256.verify("Passw0rd", user.password_hash)
 
 
 def test_create_user_duplicated_username(session: Session, user: User):
-    data = UserCreate(username=user.username, password="password")
+    data = UserCreate(username=user.username, password="Passw0rd")
 
     with pytest.raises(IntegrityError):
         crud.create_user(session, data)
