@@ -7,6 +7,7 @@ from utils._sqlmodel import fix_inherit_cache_warning
 fix_inherit_cache_warning()
 
 app = FastAPI(
+    title="Todos App",
     redoc_url=None,
     swagger_ui_parameters={
         "tryItOutEnabled": True,
